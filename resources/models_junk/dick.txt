@@ -1,0 +1,67 @@
+@name dick
+@inputs
+@outputs
+@persist [HologramName HologramModel HologramPosition HologramPositionWorld HologramSkin HologramAngle HologramScale HologramColor HologramAlpha HologramMaterial HologramParent]:array
+@persist [HoloCounter Loaded]:number [Origin]:vector [Me Chip]:entity
+@persist
+@trigger
+
+interval(25)
+
+if( first() | dupefinished() )
+{
+    Me = owner()
+    Chip = entity()
+    Origin = Chip:pos()
+    Loaded = 0
+
+    # DO NOT EDIT THIS SECTION UNLESS YOU KNOW WHAT YOU ARE DOING, OR IT MAY NOT PARSE IN MODELER CORRECTLY!
+    HoloCounter = 0
+    HologramModel = array("models/holograms/hq_sphere.mdl","models/holograms/hq_sphere.mdl","models/sprops/misc/tubes/size_4/tube_48x132.mdl","models/holograms/hq_sphere.mdl")
+    HologramPosition = array(vec(-83.7109,0,0),vec(83.7109,0,0),vec(0,0,92),vec(0,0,763))
+    HologramAngle = array(ang(0,0,0),ang(0,0,0),ang(0,0,90),ang(0,0,0))
+    HologramScale = array(vec(20,20,20),vec(20,20,20),vec(3,10,3),vec(13,13,13))
+    HologramColor = array(vec(192,144,101),vec(192,144,101),vec(192,144,101),vec(192,144,101))
+    HologramAlpha = array(255,255,255,255)
+    HologramMaterial = array("debug/debugdrawflat","debug/debugdrawflat","debug/debugdrawflat","debug/debugdrawflat")
+    HologramSkin = array(0,0,0,0)
+    HologramParent = array(0,0,0,0)
+    timer("createHolos", 1)
+    # DO NOT EDIT THIS SECTION UNLESS YOU KNOW WHAT YOU ARE DOING, OR IT MAY NOT PARSE IN MODELER CORRECTLY!
+
+}
+elseif( clk("createHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count() & holoCanCreate())
+    {
+        HoloCounter++
+        holoCreate( HoloCounter )
+        holoPos(HoloCounter, Origin + HologramPosition[HoloCounter, vector])
+        holoScale(HoloCounter, HologramScale[HoloCounter, vector])
+        holoAng(HoloCounter, HologramAngle[HoloCounter, angle])
+        holoColor(HoloCounter, HologramColor[HoloCounter, vector])
+        holoModel( HoloCounter, HologramModel[HoloCounter, string] )
+        holoMaterial( HoloCounter, HologramMaterial[HoloCounter, string] )
+        holoSkin( HoloCounter, HologramSkin[HoloCounter, number] )
+        holoAlpha( HoloCounter, HologramAlpha[HoloCounter, number] )
+    }
+    if(HoloCounter < HologramModel:count()) { timer("createHolos", 1) }
+    else { timer("parentHolos", 1) HoloCounter = 0 }
+}
+elseif( clk("parentHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count())
+    {
+        HoloCounter++
+        if(HologramParent[HoloCounter, number] > 0)
+        {
+            holoParent(HoloCounter, HologramParent[HoloCounter, number])
+        }
+    }
+    if(HoloCounter == HologramModel:count()) { Loaded = 1 }
+    else { timer("parentHolos", 1) }
+}
+elseif( clk() & Loaded == 1)
+{
+    
+}

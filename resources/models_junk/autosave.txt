@@ -1,0 +1,68 @@
+# ----------------------------------------------------------------------------------------------------------------------------- #
+# ____                                      __          __  __          ___                                                     #
+#/\  _ `.                                  /\ \        /\ \/\ \        /\_ \                                                    #
+#\ \ \/\ \  _ __    __     __      ___ ___ \ \/ ____   \ \ \_\ \    ___\//\ \     ___      __   _ __    __      ___ ___         #
+# \ \ \ \ \/\`'__\/'__`\ /'__`\  /' __` __`\\/ /',__\   \ \  _  \  / __`\\ \ \   / __`\  /'_ `\/\`'__\/'__`\  /' __` __`\       #
+#  \ \ \_\ \ \ \//\  __//\ \ \.\_/\ \/\ \/\ \ /\__, `\   \ \ \ \ \/\ \ \ \\_\ \_/\ \ \ \/\ \ \ \ \ \//\ \ \.\_/\ \/\ \/\ \      #
+#   \ \____/\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\\/\____/    \ \_\ \_\ \____//\____\ \____/\ \____ \ \_\\ \__/.\_\ \_\ \_\ \_\     #
+#    \/___/  \/_/ \/____/\/__/\/_/\/_/\/_/\/_/ \/___/      \/_/\/_/\/___/ \/____/\/___/  \/___ \ \/_/ \/__/\/_/\/_/\/_/\/_/     #
+#                                                                                          /\____/                              #
+#                                                                                          \_/__/                               #
+# ----------------------------------------------------------------------------------------------------------------------------- #
+# Modeler Version: v5.1
+# Date: 12/20/2018 @ 1629
+# Holograms: 28
+# Notes: 
+# 1 -> anchor
+# 15 -> anchor
+# --------------------------------------------- #
+@name autosave
+@inputs 
+@outputs 
+@persist Hologram:table
+
+##include "lib/dream"
+
+if( first( ) ) {
+
+    Hologram = table()
+    Hologram[ "model", array ] = array("models/holograms/cube.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/cube.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl")
+    Hologram[ "position", array ] = array(vec(2,0,17.2949),vec(17.3823,7.1729,24.7842),vec(15.6307,8.5629,26.5166),vec(17.3212,4.9376,26.5166),vec(15.5696,6.3276,28.249),vec(16.5218,8.4266,25.2178),vec(15.1623,7.7927,27.8154),vec(16.4302,5.0739,27.8154),vec(17.7896,5.7078,25.2178),vec(4.5447,1.1866,18.916),vec(7.5302,2.5787,20.8184),vec(27.0933,11.7012,33.2803),vec(26.1505,11.2616,32.6797),vec(25.1683,10.8036,32.0537),vec(0,-5,30),vec(6.4546,10.7822,37.3086),vec(5.6494,11.9836,34.8779),vec(3.8427,11.1191,38.3408),vec(3.0375,12.3207,35.9102),vec(6.705,11.2987,35.8359),vec(4.1422,12.4525,34.7861),vec(2.7871,11.8041,37.3838),vec(5.3499,10.6503,38.4326),vec(0.8343,-2.0905,31.1621),vec(1.8131,1.3231,32.5254),vec(8.227,23.691,41.457),vec(7.9179,22.613,41.0264),vec(7.5959,21.49,40.5781))
+    Hologram[ "angle", array ] = array(ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(-30,25,0),ang(60,25,0),ang(60,25,0),ang(60,25,0),ang(60,25,0),ang(60,25,0),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-21,74,-112),ang(-20.4705,-24.2386,-67.5099),ang(-20.4705,-24.2386,-67.5099),ang(-20.4705,-24.2386,-67.5099),ang(-20.4705,-24.2386,-67.5099),ang(-20.4705,-24.2386,-67.5099))
+    Hologram[ "scale", array ] = array(vec(0.1,0.1,0.1),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(0.5,0.5,0.5),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05),vec(0.1,0.1,0.1),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(5,0.4,0.4),vec(0.5,0.5,0.5),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05),vec(0.5,0.5,0.05))
+    Hologram[ "color", array ] = array(vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255))
+    Hologram[ "alpha", array ] = array(255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255)
+    Hologram[ "material", array ] = array("","","","","","","","","","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2","","","","","","","","","","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2","WTP/carbonfibre_2")
+    Hologram[ "skin", array ] = array(0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    Hologram[ "parent", array ] = array(1,1,1,1,1,1,1,1,1,1,1,1,1,1,15,15,15,15,15,15,15,15,15,15,15,15,15,15)
+    Hologram[ "note", array ] = array("anchor","","","","","","","","","","","","","","anchor","","","","","","","","","","","","","")
+
+    function buffer( ) {
+        local Next = Hologram[ "next", number ]
+        for( I = Next, Next + clamp( holoRemainingSpawns( ), 0, Hologram[ "model", array ]:count( ) - Next ) ) {
+            holoCreate(
+                I,
+                entity():toWorld(Hologram["position", array][I, vector]),
+                Hologram["scale", array][I, vector],
+                entity():toWorld(Hologram["angle", array][I, angle]),
+                vec4(Hologram["color", array][I, vector],
+                Hologram["alpha", array ][I,number]),
+                Hologram["model", array][I, string]
+            )
+            holoMaterial(I, Hologram["material", array][I, string])
+            Hologram[ "next", number ] = I
+        }
+        if( Next < Hologram[ "model", array ]:count( ) ) { timer( "buffer", 0.1 )
+        } else { for( I = 1, Hologram[ "model", array ]:count( ) ) { holoParent(I, Hologram["parent", array][I, number]) }, interval( 100 ) }
+    } buffer( )
+}
+
+if( clk( "buffer" ) ) { buffer( ) } elseif( clk( ) ) {
+    interval( 60 )
+
+}
+
+
+
+
+

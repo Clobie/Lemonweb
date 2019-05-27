@@ -1,0 +1,63 @@
+@name gatlin01
+@inputs
+@outputs
+@persist [HologramName HologramModel HologramPosition HologramPositionWorld HologramSkin HologramAngle HologramScale HologramColor HologramAlpha HologramMaterial HologramParent]:array
+@persist [HoloCounter Loaded]:number [Origin]:vector [Me Chip]:entity
+@persist
+@trigger
+
+interval(25)
+
+if( first() | dupefinished() )
+{
+    Me = owner()
+    Chip = entity()
+    Origin = Chip:pos()
+    Loaded = 0
+    HoloCounter = 0
+    HologramModel = array("models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/sprops/trans/exhaust/tip_1.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/hq_cylinder.mdl","models/holograms/cube.mdl")
+    HologramPosition = array(vec(14,0,25.6591796875),vec(14,2,27.6591796875),vec(14,-2,27.6591796875),vec(14,0,29.6591796875),vec(14,1.5,26.1591796875),vec(14,1.5,29.1591796875),vec(14,-1.5,29.1591796875),vec(14,-1.5,26.1591796875),vec(-1.201171875,0,27.6591796875),vec(2.6024780273438,0,27.6591796875),vec(27.526916503906,0,27.6591796875),vec(26.32568359375,0,27.6591796875),vec(25.074523925781,0,27.6591796875),vec(-4.443603515625,0,27.6591796875))
+    HologramAngle = array(ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(90,-0,0),ang(90,-0,0),ang(90,-0,0),ang(90,-0,0),ang(90,-0,0),ang(0,0,0))
+    HologramScale = array(vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(5,0.40000000596046,0.40000000596046),vec(0.5,0.5,0.5),vec(0.5,0.5,0.050000000745058),vec(0.5,0.5,0.050000000745058),vec(0.5,0.5,0.050000000745058),vec(0.5,0.5,0.050000000745058),vec(0.10000000149012,0.10000000149012,0.10000000149012))
+    HologramColor = array(vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255),vec(255,255,255))
+    HologramAlpha = array(255,255,255,255,255,255,255,255,255,255,255,255,255,255)
+    HologramMaterial = array("","","","","","","","","","","","","","")
+    HologramSkin = array(1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    HologramParent = array(14,14,14,14,14,14,14,14,14,14,14,14,14,0)
+    timer("createHolos", 1)
+}
+elseif( clk("createHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count() & holoCanCreate())
+    {
+        HoloCounter++
+        holoCreate( HoloCounter )
+        holoPos(HoloCounter, Origin + HologramPosition[HoloCounter, vector])
+        holoScale(HoloCounter, HologramScale[HoloCounter, vector])
+        holoAng(HoloCounter, HologramAngle[HoloCounter, angle])
+        holoColor(HoloCounter, HologramColor[HoloCounter, vector])
+        holoModel( HoloCounter, HologramModel[HoloCounter, string] )
+        holoMaterial( HoloCounter, HologramMaterial[HoloCounter, string] )
+        holoSkin( HoloCounter, HologramSkin[HoloCounter, number] )
+        holoAlpha( HoloCounter, HologramAlpha[HoloCounter, number] )
+    }
+    if(HoloCounter < HologramModel:count()) { timer("createHolos", 1) }
+    else { timer("parentHolos", 1) HoloCounter = 0 }
+}
+elseif( clk("parentHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count())
+    {
+        HoloCounter++
+        if(HologramParent[HoloCounter, number] > 0)
+        {
+            holoParent(HoloCounter, HologramParent[HoloCounter, number])
+        }
+    }
+    if(HoloCounter == HologramModel:count()) { Loaded = 1 }
+    else { timer("parentHolos", 1) }
+}
+elseif( clk() & Loaded == 1)
+{
+    
+}

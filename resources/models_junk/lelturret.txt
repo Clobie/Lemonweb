@@ -1,0 +1,126 @@
+@name lelturret
+@inputs
+@outputs Fire
+@persist [HologramName HologramModel HologramPosition HologramPositionWorld HologramSkin HologramAngle HologramScale HologramColor HologramAlpha HologramMaterial HologramParent]:array
+@persist [HoloCounter Loaded Fire]:number [Origin]:vector [Me Chip Target]:entity Gun:array
+@persist
+@trigger
+
+interval(25)
+
+if( first() | dupefinished() )
+{
+    Me = owner()
+    Chip = entity()
+    Origin = Chip:pos()
+    Loaded = 0
+    Target = Me
+    runOnChat(1)
+    
+    function vector randColor()
+    {
+        return vec( random(0,255), random(0,255), random(0,255) )
+    }
+    
+    Chip:setAlpha(0)
+    
+    # DO NOT EDIT THIS SECTION UNLESS YOU KNOW WHAT YOU ARE DOING, OR IT MAY NOT PARSE IN MODELER CORRECTLY!
+    HoloCounter = 0
+    HologramModel = array("models/holograms/hexagon.mdl","models/holograms/hexagon.mdl","models/holograms/cube.mdl","models/holograms/cube.mdl","models/holograms/cube.mdl")
+    HologramPosition = array(vec(0,0,0),vec(0,0,0.5398),vec(0,-1.1504,0.5398),vec(0,1.1504,0.5398),vec(0,0,2.688))
+    HologramAngle = array(ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0),ang(0,0,0))
+    HologramScale = array(vec(0.5,0.5,0.05),vec(0.4,0.4,0.05),vec(0.05,0.05,0.5),vec(0.05,0.05,0.5),vec(0.2,0.13,0.13))
+    HologramColor = array(randColor(),randColor(),randColor(),randColor(),randColor())
+    HologramAlpha = array(255,255,255,255,255)
+    HologramMaterial = array("","","","","")
+    HologramSkin = array(0,0,0,0,0)
+    HologramParent = array(0,1,2,2,2)
+    timer("createHolos", 1)
+    # DO NOT EDIT THIS SECTION UNLESS YOU KNOW WHAT YOU ARE DOING, OR IT MAY NOT PARSE IN MODELER CORRECTLY!
+    
+    
+    # gmod_wire_turret
+    findByClass("gmod_wire_turret")
+    local A = findToArray()
+    local B = 1
+    for(I = 1, A:count())
+    {
+        if( A[I, entity]:owner() == Me & A[I, entity]:pos():distance(Chip:pos()) < 100 )
+        {
+            Gun[B, entity] = A[I, entity]
+            B++
+        }
+    }
+    print("Turrets found: " + Gun:count() )
+    if(Gun:count() == 1)
+    {
+        Gun[1, entity]:propFreeze(1)
+        Gun[1, entity]:setPos( Chip:pos() + vec(0,0,2.688))
+        Gun[1, entity]:setAng( ang(0,90,0) )
+        #Gun[1, entity]:setAlpha(0)
+        Gun[1, entity]:createWire(Chip, "Fire", "Fire")
+    }
+    
+}
+elseif( clk( "parentTurrets" ) )
+{
+    Gun[1, entity]:parentTo( holoEntity(5) )
+    holoParent(1, Chip)
+    Loaded = 1
+}
+elseif( clk("createHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count() & holoCanCreate())
+    {
+        HoloCounter++
+        holoCreate( HoloCounter )
+        holoPos(HoloCounter, Origin + HologramPosition[HoloCounter, vector])
+        holoScale(HoloCounter, HologramScale[HoloCounter, vector])
+        holoAng(HoloCounter, HologramAngle[HoloCounter, angle])
+        holoColor(HoloCounter, HologramColor[HoloCounter, vector])
+        holoModel( HoloCounter, HologramModel[HoloCounter, string] )
+        holoMaterial( HoloCounter, HologramMaterial[HoloCounter, string] )
+        holoSkin( HoloCounter, HologramSkin[HoloCounter, number] )
+        holoAlpha( HoloCounter, HologramAlpha[HoloCounter, number] )
+    }
+    if(HoloCounter < HologramModel:count()) { timer("createHolos", 1) }
+    else { timer("parentHolos", 1) HoloCounter = 0 }
+}
+elseif( clk("parentHolos") )
+{
+    while(perf(90) & HoloCounter < HologramModel:count())
+    {
+        HoloCounter++
+        if(HologramParent[HoloCounter, number] > 0)
+        {
+            holoParent(HoloCounter, HologramParent[HoloCounter, number])
+        }
+    }
+    if(HoloCounter == HologramModel:count()) { timer( "parentTurrets", 10 ) }
+    if(HoloCounter == HologramModel:count()) { Loaded = 1 }
+    else { timer("parentHolos", 1) }
+}
+elseif( clk() & Loaded == 1)
+{
+    local V = (Target:pos() - holoEntity(5):pos())
+    holoAng( 2, V:toAngle() * ang(0,1,0) )
+    holoAng( 5, V:toAngle() )
+    
+    if( Me:keyReload() & Target:health() > 0 ) 
+    {
+        Fire = 1
+    }
+    else
+    {
+        Fire = 0
+    }
+    
+}
+elseif( chatClk(Me) )
+{
+    local S = Me:lastSaid()
+    local Param = S:explode(" ")
+    local Command = Param[1, string]
+    
+    if( Command == "/t" ) { Target = findPlayerByName(Param[2, string]) }
+}
