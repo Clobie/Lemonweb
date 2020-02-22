@@ -1,5 +1,5 @@
 #cs ----------------------------------------------------------------------------
- Script Function:	php - find/replace 'php' with plugin name, then code away!
+ Script Function:	php
  AutoIt Version: 	3.3.10.2
  Author:			Caleb Alexander
 #ce ----------------------------------------------------------------------------

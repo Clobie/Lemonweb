@@ -12,6 +12,7 @@
 #include "../../plugins/Base64.au3"
 #include "../../plugins/HoloModeler.au3"
 #include "../../plugins/php.au3"
+#include "../../plugins/perlin.au3"
 
 Global $__Plugin_Extension =			ObjCreate("Scripting.Dictionary")
 Global $__Plugin_FunctionPrefix = 		"__Plugin_"
@@ -26,6 +27,7 @@ Func __Plugin_Setup()
 	$__Plugin_Extension.Add("base64.au3", "Base64")
 	$__Plugin_Extension.Add("holomodeler.au3", "HoloModeler")
 	$__Plugin_Extension.Add("php.au3", "php")
+	$__Plugin_Extension.Add("perlin.au3", "perlin")
 
 	Local $aPlugins = $__Plugin_Extension.keys
 	For $i = 0 To UBound($aPlugins)-1
