@@ -10,8 +10,11 @@ This repository contains a proof of concept HTTP server called LemonWeb, written
 - Handles basic HTTP requests.
 - Handles PHP scripts.
 - Serves static HTML content.
-- Directory browsing and download
+- Directory browsing and download.
 - Easy to configure and extend.
+
+## TODO
+- POST requests not fully implemented, as I've lost interest.
 
 ## Requirements
 
