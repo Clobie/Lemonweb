@@ -21,8 +21,7 @@ __Http_Start()
 __Common_Start()
 
 
-__Http_RegisterVHost("dream-e2.tk")
-__Http_RegisterVHost("www.dream-e2.tk")
+__Http_RegisterVHost("url_here")
 
 Main()
 
